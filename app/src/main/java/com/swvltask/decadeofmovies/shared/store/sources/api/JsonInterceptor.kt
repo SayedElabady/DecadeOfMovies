@@ -1,4 +1,4 @@
-package com.swvltask.decadeofmovies.shared.store.api
+package com.swvltask.decadeofmovies.shared.store.sources.api
 
 import okhttp3.Interceptor
 import okhttp3.Response

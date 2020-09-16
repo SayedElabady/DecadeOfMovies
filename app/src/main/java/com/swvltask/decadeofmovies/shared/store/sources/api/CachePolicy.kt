@@ -1,4 +1,4 @@
-package com.swvltask.decadeofmovies.shared.store.api
+package com.swvltask.decadeofmovies.shared.store.sources.api
 
 
 class CachePolicy {

@@ -13,7 +13,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -54,6 +54,11 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.6.3'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.3.0'
+
+    //UI
+    implementation 'org.zakariya.stickyheaders:stickyheaders:0.7.10'
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+ //   implementation 'com.jakewharton.rxbinding4:rxbinding-appcompat:4.0.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

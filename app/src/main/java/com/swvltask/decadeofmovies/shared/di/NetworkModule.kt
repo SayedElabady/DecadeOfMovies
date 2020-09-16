@@ -3,9 +3,9 @@ package com.swvltask.decadeofmovies.shared.di
 import android.content.Context
 import com.google.gson.Gson
 import com.swvltask.decadeofmovies.shared.Constants
-import com.swvltask.decadeofmovies.shared.store.api.CachePolicy
-import com.swvltask.decadeofmovies.shared.store.api.IFlickrService
-import com.swvltask.decadeofmovies.shared.store.api.JsonInterceptor
+import com.swvltask.decadeofmovies.shared.store.sources.api.CachePolicy
+import com.swvltask.decadeofmovies.shared.store.sources.api.IFlickrService
+import com.swvltask.decadeofmovies.shared.store.sources.api.JsonInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
