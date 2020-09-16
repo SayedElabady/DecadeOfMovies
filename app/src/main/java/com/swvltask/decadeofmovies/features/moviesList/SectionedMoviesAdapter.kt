@@ -7,6 +7,8 @@ import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import com.swvltask.decadeofmovies.R
+import com.swvltask.decadeofmovies.shared.eventbus.EventBus
+import com.swvltask.decadeofmovies.shared.eventbus.Events
 import com.swvltask.decadeofmovies.shared.store.model.Movie
 import com.swvltask.decadeofmovies.shared.store.model.MoviesSection
 import org.zakariya.stickyheaders.SectioningAdapter
@@ -65,6 +67,14 @@ class SectionedMoviesAdapter(private val sections: MutableList<MoviesSection> = 
         itemUserType: Int
     ) {
         (viewHolder as ItemViewHolder?)?.bind(sections[sectionIndex].movies[itemIndex])
+        viewHolder?.view?.setOnClickListener {
+            EventBus.publish(
+                Events.ClickEvents.OnMovieClicked(
+                    sections[sectionIndex].movies[itemIndex]
+                )
+            )
+        }
+
     }
 
     inner class ItemViewHolder(val view: View) : SectioningAdapter.ItemViewHolder(view) {

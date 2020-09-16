@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.swvltask.decadeofmovies.R
+import com.swvltask.decadeofmovies.features.moviedetails.MovieDetailsFragment
+import com.swvltask.decadeofmovies.shared.eventbus.EventBus
+import com.swvltask.decadeofmovies.shared.eventbus.Events
 import com.swvltask.decadeofmovies.shared.ui.queryTextChangeEvents
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
@@ -20,32 +22,42 @@ import java.util.concurrent.TimeUnit
 
 class MoviesListFragment : Fragment() {
 
-    val viewModel: MoviesListViewModel by viewModel()
-    val sectionedAdapter = SectionedMoviesAdapter()
-    val regularAdapter = MoviesAdapter()
-    var disposable: Disposable? = null
+    private val viewModel: MoviesListViewModel by viewModel()
+    private val sectionedAdapter = SectionedMoviesAdapter()
+    private val regularAdapter = MoviesAdapter()
+    private val disposables = CompositeDisposable()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_movies_list, container, false)
-        observeData()
-        viewModel.processEvent(MoviesEvent.InitialEvent)
-        return root
+        return inflater.inflate(R.layout.fragment_movies_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initListeners()
+        observeData()
+        viewModel.processEvent(MoviesEvent.InitialEvent)
     }
 
     private fun initListeners() {
-        disposable = search_sv.queryTextChangeEvents().debounce(500, TimeUnit.MILLISECONDS)
+        disposables.add(EventBus.listen(Events.ClickEvents.OnMovieClicked::class.java).subscribe {
+            EventBus.publish(
+                Events.Navigation.OnNavigationRequested(
+                    MovieDetailsFragment.newInstance(
+                        it.movie
+                    )
+                )
+            )
+        })
+
+        disposables.add(search_sv.queryTextChangeEvents().debounce(500, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 viewModel.processEvent(MoviesEvent.SearchEvent(it.toString()))
-            }
+            })
     }
 
     private fun observeData() {
@@ -71,7 +83,7 @@ class MoviesListFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        disposable?.dispose()
+        disposables.clear()
     }
 
 }

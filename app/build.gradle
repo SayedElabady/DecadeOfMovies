@@ -47,6 +47,8 @@ dependencies {
     implementation "org.koin:koin-androidx-scope:$koin_version"
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     testImplementation "org.koin:koin-test:$koin_version"
 
     // retrofit
@@ -58,7 +60,7 @@ dependencies {
     //UI
     implementation 'org.zakariya.stickyheaders:stickyheaders:0.7.10'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
- //   implementation 'com.jakewharton.rxbinding4:rxbinding-appcompat:4.0.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

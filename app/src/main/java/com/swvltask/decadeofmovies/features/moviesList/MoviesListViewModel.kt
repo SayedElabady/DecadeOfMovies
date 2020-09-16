@@ -3,7 +3,6 @@ package com.swvltask.decadeofmovies.features.moviesList
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.SortedList
 import com.swvltask.decadeofmovies.shared.store.model.Movie
 import com.swvltask.decadeofmovies.shared.store.model.MoviesSection
 import com.swvltask.decadeofmovies.shared.store.repo.IMovieRepository
@@ -35,7 +34,8 @@ class MoviesListViewModel(private val repo: IMovieRepository) : ViewModel() {
         } else {
             _state.value =
                 MoviesViewState.SearchMoviesResult(
-                    _moviesSource.asSequence().filter { it.title.toLowerCase().contains(searchQuery.toLowerCase())  }
+                    _moviesSource.asSequence()
+                        .filter { it.title.toLowerCase().contains(searchQuery.toLowerCase()) }
                         .sortedByDescending { it.rating }.take(5).groupBy {
                             it.year
                         }.map {
@@ -47,13 +47,15 @@ class MoviesListViewModel(private val repo: IMovieRepository) : ViewModel() {
 
 }
 
-sealed class MoviesViewState() {
+sealed class MoviesViewState {
     data class MoviesResult(val movies: List<Movie>) : MoviesViewState()
     data class SearchMoviesResult(val sections: List<MoviesSection>) : MoviesViewState()
     object ResetMovies : MoviesViewState()
+
 }
 
-sealed class MoviesEvent() {
+sealed class MoviesEvent {
     object InitialEvent : MoviesEvent()
     data class SearchEvent(val searchQuery: String) : MoviesEvent()
 }
+

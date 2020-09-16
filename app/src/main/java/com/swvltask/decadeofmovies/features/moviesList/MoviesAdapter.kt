@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.swvltask.decadeofmovies.R
+import com.swvltask.decadeofmovies.shared.eventbus.EventBus
+import com.swvltask.decadeofmovies.shared.eventbus.Events
 import com.swvltask.decadeofmovies.shared.store.model.Movie
 
 class MoviesAdapter(private val movies: MutableList<Movie> = mutableListOf()) :
@@ -26,6 +28,7 @@ class MoviesAdapter(private val movies: MutableList<Movie> = mutableListOf()) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(movies[position])
+        holder.view.setOnClickListener { EventBus.publish(Events.ClickEvents.OnMovieClicked(movies[position])) }
     }
 
     fun updateItems(movies: List<Movie>) {

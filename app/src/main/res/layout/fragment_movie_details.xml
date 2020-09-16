@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/horizontal_margin">
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_back"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_margin_small"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/medium_large_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/back_btn"
+        app:layout_constraintEnd_toStartOf="@id/year_tv"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/back_btn"
+        app:layout_constraintTop_toTopOf="@id/back_btn"
+        tools:text="Tenet" />
+
+    <TextView
+        android:id="@+id/year_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_margin_smaller"
+        android:textSize="@dimen/small_text_size"
+        app:layout_constraintBottom_toBottomOf="@id/title_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/title_tv"
+        app:layout_constraintTop_toTopOf="@id/title_tv"
+        tools:text="test" />
+
+    <RatingBar
+        android:id="@+id/rating_rb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:numStars="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
+    <TextView
+        android:id="@+id/genre_header_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/genre_header"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/medium_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rating_rb" />
+
+    <TextView
+        android:id="@+id/genre_value_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/small_medium_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/genre_header_tv" />
+
+    <TextView
+        android:id="@+id/cast_header_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cast_header"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/medium_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/genre_value_tv" />
+
+    <TextView
+        android:id="@+id/cast_value_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/small_medium_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cast_header_tv" />
+
+
+    <TextView
+        android:id="@+id/gallery_header_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gallery_header"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/medium_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cast_value_tv" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gallery_rv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gallery_header_tv" />
+
+    <ProgressBar
+        android:id="@+id/gallery_pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gallery_header_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

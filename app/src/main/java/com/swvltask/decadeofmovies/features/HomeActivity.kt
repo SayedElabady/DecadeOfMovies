@@ -13,6 +13,7 @@ import io.reactivex.disposables.Disposable
 
 class HomeActivity : AppCompatActivity() {
     var disposable: Disposable? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -29,7 +30,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun navigateTo(fragment: Fragment, tag: String? = null) {
-        supportFragmentManager.beginTransaction().add(R.id.container, fragment).addToBackStack(tag)
+        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).addToBackStack(tag)
             .commit()
     }
 
