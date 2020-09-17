@@ -10,10 +10,10 @@ import com.swvltask.decadeofmovies.R
 import com.swvltask.decadeofmovies.shared.eventbus.EventBus
 import com.swvltask.decadeofmovies.shared.eventbus.Events
 import com.swvltask.decadeofmovies.shared.store.model.Movie
-import com.swvltask.decadeofmovies.shared.store.model.MoviesSection
+import com.swvltask.decadeofmovies.shared.store.model.MovieSection
 import org.zakariya.stickyheaders.SectioningAdapter
 
-class SectionedMoviesAdapter(private val sections: MutableList<MoviesSection> = mutableListOf()) :
+class SectionedMoviesAdapter(private val sections: MutableList<MovieSection> = mutableListOf()) :
     SectioningAdapter() {
 
     override fun doesSectionHaveFooter(sectionIndex: Int): Boolean = false
@@ -37,7 +37,7 @@ class SectionedMoviesAdapter(private val sections: MutableList<MoviesSection> = 
         (viewHolder as HeaderViewHolder).bind(sections[sectionIndex])
     }
 
-    fun updateItems(sections: List<MoviesSection>) {
+    fun updateItems(sections: List<MovieSection>) {
         this.sections.clear()
         this.sections.addAll(sections)
         notifyAllSectionsDataSetChanged()
@@ -102,14 +102,14 @@ class SectionedMoviesAdapter(private val sections: MutableList<MoviesSection> = 
             year = view.findViewById(R.id.year_tv)
         }
 
-        fun bind(section: MoviesSection) {
+        fun bind(section: MovieSection) {
             year?.text = section.year.toString()
         }
     }
 
     inner class MovieSectionDiffUtil constructor(
-        private val oldItems: List<MoviesSection>,
-        private val newItems: List<MoviesSection>
+        private val oldItems: List<MovieSection>,
+        private val newItems: List<MovieSection>
     ) : DiffUtil.Callback() {
 
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

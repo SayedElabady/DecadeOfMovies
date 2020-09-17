@@ -30,9 +30,11 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun navigateTo(fragment: Fragment, tag: String? = null) {
-        supportFragmentManager.beginTransaction().replace(R.id.container, fragment).addToBackStack(tag)
+        supportFragmentManager.beginTransaction().replace(R.id.container, fragment)
+            .addToBackStack(tag)
             .commit()
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

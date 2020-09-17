@@ -5,11 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.swvltask.decadeofmovies.shared.store.model.Movie
 import com.swvltask.decadeofmovies.shared.store.repo.IMovieRepository
+import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class MovieDetailsViewModel(private val moviesRepository: IMovieRepository) : ViewModel() {
+class MovieDetailsViewModel(
+    private val moviesRepository: IMovieRepository,
+    private val workerScheduler: Scheduler = Schedulers.io(),
+    private val postWorkScheduler: Scheduler = AndroidSchedulers.mainThread()
+) : ViewModel() {
 
     var disposable: Disposable? = null
 
@@ -20,8 +25,8 @@ class MovieDetailsViewModel(private val moviesRepository: IMovieRepository) : Vi
     fun fetchPhotos(movieTitle: String) {
         _state.value = MovieDetailsState.LoadingPhotos
         disposable = moviesRepository.getMoviePhotosUrls(movieTitle)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(workerScheduler)
+            .observeOn(postWorkScheduler)
             .subscribe({
                 _state.value = MovieDetailsState.OnPhotosReady(it)
             }) {
@@ -35,6 +40,10 @@ class MovieDetailsViewModel(private val moviesRepository: IMovieRepository) : Vi
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        disposable?.dispose()
+    }
 }
 
 sealed class MovieDetailsState {

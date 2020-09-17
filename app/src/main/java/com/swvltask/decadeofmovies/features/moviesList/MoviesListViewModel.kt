@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.swvltask.decadeofmovies.shared.store.model.Movie
-import com.swvltask.decadeofmovies.shared.store.model.MoviesSection
+import com.swvltask.decadeofmovies.shared.store.model.MovieSection
 import com.swvltask.decadeofmovies.shared.store.repo.IMovieRepository
 
 class MoviesListViewModel(private val repo: IMovieRepository) : ViewModel() {
@@ -39,7 +39,7 @@ class MoviesListViewModel(private val repo: IMovieRepository) : ViewModel() {
                         .sortedByDescending { it.rating }.take(5).groupBy {
                             it.year
                         }.map {
-                            MoviesSection(it.key, it.value)
+                            MovieSection(it.key, it.value)
                         }.toList()
                 )
         }
@@ -49,7 +49,7 @@ class MoviesListViewModel(private val repo: IMovieRepository) : ViewModel() {
 
 sealed class MoviesViewState {
     data class MoviesResult(val movies: List<Movie>) : MoviesViewState()
-    data class SearchMoviesResult(val sections: List<MoviesSection>) : MoviesViewState()
+    data class SearchMoviesResult(val sections: List<MovieSection>) : MoviesViewState()
     object ResetMovies : MoviesViewState()
 
 }

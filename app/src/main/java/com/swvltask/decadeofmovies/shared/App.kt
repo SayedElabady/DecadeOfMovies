@@ -1,6 +1,7 @@
 package com.swvltask.decadeofmovies.shared
 
 import android.app.Application
+import com.swvltask.decadeofmovies.shared.di.mappersModule
 import com.swvltask.decadeofmovies.shared.di.viewModelsModule
 import com.swvltask.decadeofmovies.shared.di.networkModule
 import com.swvltask.decadeofmovies.shared.di.reposModule
@@ -13,8 +14,8 @@ class App : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules (
-                listOf(reposModule, viewModelsModule, networkModule)
+            modules(
+                listOf(mappersModule, reposModule, viewModelsModule, networkModule)
             )
         }
     }

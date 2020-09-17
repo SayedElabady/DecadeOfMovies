@@ -15,6 +15,7 @@ import com.swvltask.decadeofmovies.shared.eventbus.Events
 import com.swvltask.decadeofmovies.shared.ui.queryTextChangeEvents
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
@@ -81,8 +82,8 @@ class MoviesListFragment : Fragment() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         disposables.clear()
     }
 

@@ -10,6 +10,6 @@ import org.koin.dsl.module
 val reposModule = module {
 
     single<IMoviesProvider> { MoviesProvider(get()) }
-    single<IMovieRepository> { MovieRepository(get(), get()) }
+    single<IMovieRepository> { MovieRepository(get(), get(), get()) }
 
 }

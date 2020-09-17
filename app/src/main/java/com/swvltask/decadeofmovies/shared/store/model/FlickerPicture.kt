@@ -7,8 +7,8 @@ import com.google.gson.annotations.SerializedName
  *
  */
 data class FlickerPicture(
-    @SerializedName("id") val id: String?,
-    @SerializedName("server") val server: String?,
-    @SerializedName("secret") val secret: String?,
+    @SerializedName("id") val id: String,
+    @SerializedName("server") val server: String,
+    @SerializedName("secret") val secret: String,
     @SerializedName("farm") val farm: Int
 )

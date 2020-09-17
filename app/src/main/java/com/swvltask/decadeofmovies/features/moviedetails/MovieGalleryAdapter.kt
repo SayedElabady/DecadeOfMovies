@@ -35,7 +35,7 @@ class MovieGalleryAdapter(private val photos: List<String>) :
         }
 
         fun bind(moviePhotoUrl: String) {
-            Picasso.get().load(moviePhotoUrl).into(moviePhoto)
+            Picasso.get().load(moviePhotoUrl).placeholder(R.mipmap.ic_placeholder).into(moviePhoto)
         }
     }
 
